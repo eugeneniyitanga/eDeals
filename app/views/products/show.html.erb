@@ -1,0 +1,30 @@
+<title> Electonic Products </title>
+<table class="table stripped">
+<tr>
+    <th> Product <br></th>
+    <th> Description <br></th>
+    <th> Price <br></th>
+    <th> Images </th>
+</tr>
+    <tr>
+    <td><%= @product.name %><br></td>
+    <br>
+    <td><%= @product.description %><br></td>
+    <br>
+    <td><%= @product.price %><br></td>
+     <% @product.images.each do |image| %> 
+   <td><img class="images" src="<%= image.url %>"></td>
+    <% end %> 
+        
+    </tr>
+
+</table>
+
+<%= form_tag "/products/#{@product.id}", method: :delete do %>
+<input type="submit" value="Delete">
+<% end %>
+
+ <%= button_to "Edit Product", "/products/#{@product.id}/edit", method: :get, :data => {:confirm => 'Are you sure?'} %>
+
+    
+    
