@@ -3,9 +3,22 @@
 }
 
 .images {
-  width: 280px;
+  width: 350px;
 }
 
 body {
   border: purple; 
+}
+
+.navbar {
+   color: white;
+   background-color: purple;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+.created_at {
+  color: blue; 
 }

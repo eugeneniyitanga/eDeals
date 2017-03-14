@@ -1,30 +1,142 @@
-<title> Electonic Products </title>
-<table class="table stripped">
+<!-- <title> Electonic Products </title>
+<table class="table table bordered">
 <tr>
     <th> Product <br></th>
     <th> Description <br></th>
     <th> Price <br></th>
     <th> Images </th>
+    <th> Edit </th>
+    <th> Delete</th>
 </tr>
     <tr>
     <td><%= @product.name %><br></td>
     <br>
     <td><%= @product.description %><br></td>
     <br>
-    <td><%= @product.price %><br></td>
+    <td>$<%= @product.price %><br></td>
      <% @product.images.each do |image| %> 
-   <td><img class="images" src="<%= image.url %>"></td>
+   <td><img class="images" src="<%= image.url %>"><br></td>
     <% end %> 
+    <td><%= button_to "Edit", "/products/#{@product.id}/edit", method: :get, :data => {:confirm => 'Are you sure?'} %>
+<br></td>
         
+    <td><%= form_tag "/products/#{@product.id}", method: :delete do %>
+<input type="submit" value="Delete"></td>
+<% end %>  
     </tr>
+</table><br><br>
 
-</table>
 
-<%= form_tag "/products/#{@product.id}", method: :delete do %>
-<input type="submit" value="Delete">
-<% end %>
 
- <%= button_to "Edit Product", "/products/#{@product.id}/edit", method: :get, :data => {:confirm => 'Are you sure?'} %>
+<ul>
+<% @product.comments.each do |comment| %> 
+    <p><strong><%= comment.comment%></strong><p>
+<p class="created_at">Commented <%= time_ago_in_words(comment.created_at) %>Ago</p><br>
+<% end %> 
+</ul><br><br>
 
+
+<p><strong>Add Comment</strong>
+<%= form_tag "/comments", method: :post do %>
+    Comment:<br>
+    <textarea rows="4" cols="50" name="comment"></textarea><br>
+    <input type="hidden" name="product_id" value="<%= @product.id %>">
+    <button type="submit">Submit</button>
+<% end %> 
+</p><br><br> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> <strong><%=@product.name %> Details</strong></title>
+    <link href="" rel="stylesheet">
+    <link href="" rel="stylesheet">
+
+  </head>
+
+  <body>
     
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="wrapper row">
+                    <div class="preview col-md-6">
+                        
+                        <div class="preview-pic tab-content">
+                          <div class="tab-pane active" id="pic-1">
+                               <% @product.images.each do |image| %> 
+                              <img class="images" src="<%= image.url %>"><br></td>
+                            <% end %> 
+                          </div>
+                         <!--  <div class="tab-pane" id="pic-2"><img src="" /></div>
+                          <div class="tab-pane" id="pic-3"><img src="" /></div>
+                          <div class="tab-pane" id="pic-4"><img src="" /></div>
+                          <div class="tab-pane" id="pic-5"><img src="" /></div> -->
+                        </div>
+                        <ul class="preview-thumbnail nav nav-tabs">
+                          <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="" /></a></li>
+                          <li><a data-target="#pic-2" data-toggle="tab"><img src="" /></a></li>
+                          <li><a data-target="#pic-3" data-toggle="tab"><img src="" /></a></li>
+                          <li><a data-target="#pic-4" data-toggle="tab"><img src="" /></a></li>
+                          <li><a data-target="#pic-5" data-toggle="tab"><img src="" /></a></li>
+                        </ul>
+                        
+                    </div>
+                    <div class="details col-md-6">
+                        <h3 class="product-title"><%=@product.name %></h3>
+                        <div class="rating">
+                            <div class="stars">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <span class="review-no">41 reviews</span>
+                        </div>
+                        <p class="product-description"><%= @product.description %></p>
+                        <h4 class="price">current price: <span>$<%= @product.price %></span></h4>
+                        <p class="vote"><strong><!-- 91% --></strong> <!-- of buyers enjoyed this product! <strong>(87 votes) --></strong></p>
+                        <!-- <h5 class="sizes">sizes:
+                            <span class="size" data-toggle="tooltip" title="small">s</span>
+                            <span class="size" data-toggle="tooltip" title="medium">m</span>
+                            <span class="size" data-toggle="tooltip" title="large">l</span>
+                            <span class="size" data-toggle="tooltip" title="xtra large">xl</span> -->
+                        </h5>
+                       <!--  <h5 class="colors">colors:
+                            <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
+                            <span class="color green"></span>
+                            <span class="color grey"></span>
+                        </h5> -->
+                        <div class="action">
+                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                            <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+                        <% @product.comments.each do |comment| %> 
+                            <p><strong><%= comment.comment%></strong><p>
+                        <p class="created_at">Commented <%= time_ago_in_words(comment.created_at) %>Ago</p><br>
+                        <% end %> 
+                        </ul><br><br>
+
+
+                        <h5><strong>Add Comment</strong></h5>
+                        <%= form_tag "/comments", method: :post do %>
+                            <p>Comment:<br>
+                            <textarea rows="4" cols="50" name="comment"></textarea><br></p>
+                            <input type="hidden" name="product_id" value="<%= @product.id %>">
+                            <button type="submit">Submit</button>
+                        <% end %> 
+                        </p><br><br>
+  </body>
+</html>
+
