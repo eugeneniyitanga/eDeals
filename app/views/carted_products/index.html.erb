@@ -1,0 +1,32 @@
+<div class="row">
+ <div class="col-md-2"></div>
+ <div class="col-md-8">
+
+<table class="table">
+<tr>
+
+<th>Product</th>
+<th>Quantity</th>
+<th>Product_id</th>
+<th>Price</th>
+<th>Image</th>
+<th>Delete Product</th><br>
+</tr>
+
+<% @order.carted_products.each do |carted_product| %>
+<tr> 
+<td><%= carted_product.product.name %></td>
+<td><%= carted_product.quantity %></td>
+<td><%= carted_product.product_id %></td>
+<td><%= carted_product.product.price %></td>
+<td><img class="carted_product" class="image" src ="<%= carted_product.product.images.first.url  %>"></td>
+<td><%= link_to "Remove", "/carted_products/#{carted_product.id}", method: :delete %></td>
+</tr>
+<% end %>
+</table><br>
+
+
+<%= button_to "Buy Now", "/orders/#{@order.id}", class: "btn btn-success", method: :patch %>
+</div>
+</div>
+ 

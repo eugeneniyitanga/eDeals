@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  
   get "/", to: 'products#index'
+
+  
   get "/products", to: 'products#index'
   get "/products/new", to: 'products#new'
   get "/products/:id", to: 'products#show'
@@ -18,5 +21,12 @@ Rails.application.routes.draw do
 
   get "/comments", to: 'comments#new'
   post "/comments", to: 'comments#create'
+
+  get "/orders/:id", to: "orders#show"
+  patch "/orders/:id", to: 'orders#update'
+
+    post "/carted_products", to: 'carted_products#create'
+  get "/carted_products", to: 'carted_products#index'
+  delete "/carted_products/:id", to: 'carted_products#destroy'
 end
 

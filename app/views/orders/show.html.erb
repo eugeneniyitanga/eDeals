@@ -1,0 +1,27 @@
+<div class="row">
+ <div class="col-md-2"></div>
+ <div class="col-md-8">
+     <h1> <strong> Dear <%= current_user.first_name %>, you ordered: </strong></h1><br><br>
+     <table class="table table-space">
+         <tr>
+           <th>Product Name</th>
+           <th>Quantity</th>
+           <th>Unit Price</th>
+         </tr>
+       <% @order.carted_products.each do |carted_product| %>
+         <tr>
+           <td><%= carted_product.product.name %></td>
+           <td><%= carted_product.quantity %></td>
+           <td><%= carted_product.product.price %></td>
+           </tr>
+           <% end %> 
+           </table><br>
+
+                <ul>
+          <!-- <li>Order Number <%= @order.id %></li> -->
+          <li><strong>Subtotal:</strong>  <%= @order.subtotal %></li><br>
+          <li><strong>Tax:</strong>  <%= @order.tax %></li><br>
+          <li><strong>Total:</strong>  <%= @order.total %></li>
+        </ul>
+           </div>
+           </div>

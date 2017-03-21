@@ -1,7 +1,5 @@
 <br>
-<h1> Enjoy eDeals!!</h1>
-<br>
-<br>
+<h1 class="header" style="text-align: center"><strong>Enjoy eDeals!!</h1></strong><br><br>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
@@ -15,15 +13,15 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="https://s-media-cache-ak0.pinimg.com/736x/58/da/1e/58da1e8c38dc002bb3e1a92dba32963f.jpg" alt="Chania">
+      <img style="text-align: center" src="https://s-media-cache-ak0.pinimg.com/736x/58/da/1e/58da1e8c38dc002bb3e1a92dba32963f.jpg" alt="">
     </div>
 
     <div class="item">
-      <img src= "http://i.ebayimg.com/00/s/NTAwWDUwMA==/z/Zu0AAOxyVaBSsSbm/$_35.JPG?set_id=2" alt="Chania">
+      <img style="text-align: center" src= "http://i.ebayimg.com/00/s/NTAwWDUwMA==/z/Zu0AAOxyVaBSsSbm/$_35.JPG?set_id=2" alt="">
     </div>
 
     <div class="item">
-      <img src="https://www.androidcentral.com/sites/androidcentral.com/files/styles/w800h450crop/public/topic_images/2015/galaxy-s6-both-versions-5.jpg?itok=2t6DYZEw&timestamp=1429735520" alt="Samsung Galaxy S 6">
+      <img style="text-align: center" src="https://www.androidcentral.com/sites/androidcentral.com/files/styles/w800h450crop/public/topic_images/2015/galaxy-s6-both-versions-5.jpg?itok=2t6DYZEw&timestamp=1429735520" alt="Samsung Galaxy S 6">
     </div>
 
     <div class="item">
@@ -40,8 +38,9 @@
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>
-<br>
+</div><br><br><br>
+
+    <%= button_to "Add New Product", "/products/new", class: "btn btn-primary", method: :get %>
 
  <br>
   <div class="row">
@@ -50,10 +49,8 @@
     <div class="row">
       <% three_products.each do |product| %>
       <div class="col-md-4">
-        <h4><a href="/products/<%= product.id %>"><%= product.name %></a><br></h4>
-       <!--  <br>
-        <h4><%= product.name %><br></h4> -->
-        <br>
+        <h4><a href="/products/<%= product.id %>"><%= product.name %></a></h4><br>
+        <h4><img class="index" src="<%=product.images.first.url %>"</h4><br><br>
         <h4><%= product.description %><br></h4>
         <br>
         <h4>$<%= product.price %><br></h4>

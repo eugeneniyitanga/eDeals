@@ -1,19 +1,28 @@
 
 
-  <h1>Signup!</h1>
-  <br>
-  <%= form_tag '/users', method: :post do  %>
-    <div><br>First Name: <br><input type="text" name="first_name"></div>
-  
-     <div><br>Last Name:<br><input type="text" name="last_name"></div>
-  
-    <div><br>Email:<br><input type="email" name="email"></div>
-  
-    <div><br>Phone Number:<br><input type="text" name="phone_number"></div>
-  
-    <div><br>Password:<br><input type="password" name="password"></div>
-  
-    <div><br>Confirm Password:<br><input type="password" name="password_confirmation"></div>
-  
-    <input type="submit" value="Create Account">
-  <% end %>  
+<div class="container">
+  <div class="row">
+   <div class="col-md-6">
+
+      <%= form_tag "/users", method: :post do %>
+      <form>
+      <div id="fullscreen_bg" class="fullscreen_bg"/>
+      <form class="form-signin"><br>
+        <h1 class="form-signin-heading text-muted" style="text-align: center"><strong>Create Account</strong></h1>
+        <h4>First Name</h4><input type="name" class="form-control" name="first_name" placeholder="First name" required="" autofocus="">
+         <h4>Last Name</h4><input type="name" class="form-control" name="last_name" placeholder="Last Name" required="" autofocus="">
+          <h4>Email</h4><input type="email" class="form-control" name="email" placeholder="email" required="" autofocus="">
+           <h4>Phone Number</h4><input type="text" class="form-control" name="phone_number" placeholder="Phone Number" required="" autofocus="">
+        <h4>Password</h4><input type="password" class="form-control" name="password" placeholder="password" required="" autofocus=""><br>
+        <h4>Confirm Password</h4><input type="password" class="form-control" name="password_confirmation" placeholder="Re-type password here..." required="" autofocus=""><br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+          Create Account
+        </button>
+      </form>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>
+</div>

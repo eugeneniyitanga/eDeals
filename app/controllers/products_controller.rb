@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
    before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
 
   def index 
-    @products = Product.all 
+    @products = Product.all.order("created_at DESC")
   end 
 
   def show 

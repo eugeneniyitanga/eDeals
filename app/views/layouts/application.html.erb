@@ -6,7 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Kumar+One" rel="stylesheet">
+    <link href="" rel="stylesheet">
   </head>
 
    <% flash.each do |name, message| %>
@@ -22,22 +22,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">Home</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="/products"><strong>eDeals</strong><span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a href="#" class="sort " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/products?sort=price">sort</a></li>
-            <li><a href="/products?sort=asc">Sort By Price Highest to Lowest</a></li>
-            <li><a href="/products?sort=desc">Sort By Price Lowest to Highest</a></li>
-            <li><a href="/products?filter=discount">Discounted Items</a></li>
-            <li><a href="/products/random">Random Product</a></li>
+            <li><a href="/products?sort=price"></a></li>
+            <li><a href="/products?sort=asc"></a></li>
+            <li><a href="/products?sort=desc"></a></li>
+            <li><a href="/products?filter=discount"></a></li>
+            <li><a href="/products/random"></a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li role="separator" class="divider"></li>
