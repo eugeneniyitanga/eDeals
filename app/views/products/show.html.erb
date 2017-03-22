@@ -141,7 +141,7 @@ render _form/_comment
     </div>
     <br><br>
                         <% @product.comments.each do |comment| %> 
-                         <a href="/users/<%= current_user.id %>"><strong><%= current_user.first_name + " " + current_user.last_name %></strong></a>
+                         <a href="/users"><strong><%= current_user.first_name + " " + current_user.last_name %></strong></a>
                             <p><%= comment.comment%><p>
                         <p class="created_at">Commented <%= time_ago_in_words(comment.created_at) %> ago</p><br>
                         <% end %> 

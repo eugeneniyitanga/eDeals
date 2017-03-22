@@ -1,0 +1,24 @@
+   <h1 style="text-align: center"><strong><%= current_user.seller_profile.company_name %></strong></h1><br><br>
+
+   <%= button_to "Add New Product", "/products/new", class: "btn btn-primary", method: :get %><br>
+
+ <br>
+  <div class="row">
+  <div class="row">
+  <% @products.each_slice(3) do |three_products| %>
+    <div class="row">
+      <% three_products.each do |product| %>
+      <div class="col-md-4">
+        <h4><a href="/products/<%= product.id %>"><%= product.name %></a></h4><br>
+        <h4><img class="index" src="<%=product.images.first.url %>"></h4><br><br>
+        </script>
+
+        <h4><%= product.description %><br></h4>
+        <br>
+        <h4>$<%= product.price %><br></h4>
+      </div>
+      <br>
+      <% end %> 
+    </div>
+    <% end %> 
+  </div>

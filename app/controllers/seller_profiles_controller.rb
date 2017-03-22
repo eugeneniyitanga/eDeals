@@ -1,19 +1,31 @@
 class SellerProfilesController < ApplicationController
 
+  def index  
+  end
+
   def new 
   end 
 
-  def create
+  def show 
+    @products = current_user.products 
+  end
 
-    first_name = params[:first_name],
-    last_name = params[:last_name],
+  def create
+    seller_profile = current_user
+    company_name = params[:company_name],
     phone_number = params[:phone_number],
+    company_email =params[:company_email],
     location = params[:location],
     street_code = params[:street_code]
-    seller_profile = SellerProfile.new(first_name: first_name, last_name: last_name, phone_number: phone_number, location: location, street_code: street_code)
-    seller_profile.save 
-    redirect_to ""
 
+    seller_profile = SellerProfile.new(company_name: company_name, phone_number: phone_number, company_email: company_email, location: location, street_code: street_code, user_id: current_user.id)
+
+    if seller_profile.save 
+    redirect_to "/seller_profiles/#{seller_profile.id}"
+
+    else 
+      render 'new'
+    end 
   end 
 
 end

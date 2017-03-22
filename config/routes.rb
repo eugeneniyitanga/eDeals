@@ -28,5 +28,9 @@ Rails.application.routes.draw do
     post "/carted_products", to: 'carted_products#create'
   get "/carted_products", to: 'carted_products#index'
   delete "/carted_products/:id", to: 'carted_products#destroy'
+
+  resources :seller_profiles 
 end
+
+
 

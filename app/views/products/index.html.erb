@@ -2,6 +2,8 @@
 <h1 class="header" style="text-align: center"><strong>Enjoy eDeals!!</h1></strong><br><br>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <script src='jquery-1.8.3.min.js'></script>
+  <script src='jquery.elevateZoom-2.1.0.min.js'></script>
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -50,7 +52,15 @@
       <% three_products.each do |product| %>
       <div class="col-md-4">
         <h4><a href="/products/<%= product.id %>"><%= product.name %></a></h4><br>
-        <h4><img class="index" src="<%=product.images.first.url %>"</h4><br><br>
+        <h4><img id="zoom_07" class="index" src="<%=product.images.first.url %>" data-zoom-image="<%=product.images.first.url %>"></h4><br><br>
+        <script> 
+          $("#zoom_07").elevateZoom({
+            zoomType        : "lens",
+            lensShape : "round",
+            lensSize    : 200
+          });
+        </script>
+
         <h4><%= product.description %><br></h4>
         <br>
         <h4>$<%= product.price %><br></h4>
