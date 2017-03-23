@@ -1,11 +1,12 @@
 class CartedProductsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     orders = Order.where("user_id = ? AND completed = ?", current_user.id, false)
     @carts = CartedProduct.where(order_id:orders.first.id)
     @order = current_user.orders.find_by(completed: false)
     unless @order
-      flash[:warning] = "No Product in Your Shopping Cart"
+      flash[:warning] = "Your Cart is Empty!"
       redirect_to "/"
     end
   end

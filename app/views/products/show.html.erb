@@ -73,10 +73,12 @@ render _form/_comment
                             <% end %> 
                           </div>
                           <div><br><br>
+                          <% if current_user.admin || current_user.seller_profile %>
                            <%= link_to "Edit Product", "/products/#{@product.id}/edit", method: :get, :data => {:confirm => 'Are you sure?'}, class: "btn btn-success" %>
                 
 
                             <%= link_to "Delete Product", "/products/#{@product.id}", method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>              
+                           <% end %>
                          </div>
                          <!--  <div class="tab-pane" id="pic-2"><img src="" /></div>
                           <div class="tab-pane" id="pic-3"><img src="" /></div>
@@ -108,6 +110,9 @@ render _form/_comment
                         <h4 class="price">current price: <span>$<strong><%= @product.price %></strong></span></h4>
 
                         <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+                    
+                        <h4 class=""><Strong>Company Name: </Strong><strong><%= @product.seller_profile.company_name %></strong></span><br></h4>
+
                       <!--   <h5 class="sizes">sizes:
                             <span class="size" data-toggle="tooltip" title="small">s</span>
                             <span class="size" data-toggle="tooltip" title="medium">m</span>
@@ -141,7 +146,7 @@ render _form/_comment
     </div>
     <br><br>
                         <% @product.comments.each do |comment| %> 
-                         <a href="/users"><strong><%= current_user.first_name + " " + current_user.last_name %></strong></a>
+                         <a href="/users"><strong><%= comment.user.first_name %></strong></a>
                             <p><%= comment.comment%><p>
                         <p class="created_at">Commented <%= time_ago_in_words(comment.created_at) %> ago</p><br>
                         <% end %> 

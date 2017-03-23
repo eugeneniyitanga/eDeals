@@ -1,6 +1,9 @@
-   <h1 style="text-align: center"><strong><%= current_user.seller_profile.company_name %></strong></h1><br><br>
+   <h1 class="profile_picture" style="float: right;"><img src="<%= current_user.seller_profile.image_url %>"><strong></strong></h1><br><br>
+   <h4 style="float: right;"><%= current_user.seller_profile.company_name %></h4>
 
-   <%= button_to "Add New Product", "/products/new", class: "btn btn-primary", method: :get %><br>
+     <% if current_user.seller_profile %>
+       <%= button_to "Add New Product", "/products/new", class: "btn btn-primary", method: :get %><br>
+     <% end %>
 
  <br>
   <div class="row">
