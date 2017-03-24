@@ -13,13 +13,20 @@ class SellerProfilesController < ApplicationController
 
   def create
     seller_profile = current_user
-    company_name = params[:company_name],
-    phone_number = params[:phone_number],
-    company_email =params[:company_email],
-    location = params[:location],
-    street_code = params[:street_code]
 
-    seller_profile = SellerProfile.new(company_name: company_name, phone_number: phone_number, company_email: company_email, location: location, street_code: street_code, user_id: current_user.id)
+    street_code = params[:street_code]
+    coordinates = Geocoder.coordinates(street_code)
+
+    seller_profile = SellerProfile.new(
+      company_name: params[:company_name], 
+      phone_number: params[:phone_number], 
+      company_email: params[:company_email], 
+      location: params[:location], 
+      street_code: street_code,
+      latitude: coordinates[0],
+      longitude: coordinates[1],
+      user_id: current_user.id
+      )
 
     if @seller_profile.save 
     redirect_to "/seller_profiles/#{seller_profile.id}"
@@ -27,6 +34,32 @@ class SellerProfilesController < ApplicationController
     else 
       render 'new'
     end 
+  end 
+
+  def edit 
+    @seller_profile = SellerProfile.find_by(id: params[:id])
+  end
+   
+  
+
+  def update
+    seller_profile = SellerProfile.find_by(id: params[:id])
+
+    street_code = params[:street_code]
+    coordinates = Geocoder.coordinates(street_code)
+
+    seller_profile.update(
+    company_name: params[:company_name],
+    phone_number: params[:phone_number],
+    company_email: params[:company_email],
+    location: params[:location],
+    street_code: street_code,
+    latitude: coordinates[0],
+    longitude: coordinates[1]
+    )
+
+    flash[:success] = "Profile Updated!"
+    redirect_to "/seller_profiles/#{seller_profile.id}"
   end 
 
 end

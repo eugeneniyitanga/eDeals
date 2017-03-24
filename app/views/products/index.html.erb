@@ -1,5 +1,5 @@
       <% if current_user.seller_profile %>
-        <h4 style="float: right;"><a href="/seller_profiles/<%= current_user.seller_profile.id %>", class: "btn btn-primary">Go to Your store</a></h4><br> 
+        <h4 style="float: right;"><a href="/seller_profiles/<%= current_user.seller_profile.id %>", class: "btn btn-primary"><strong>Visit Your store</a></strong></h4><br> 
       <% end %>
       
      <% unless current_user.seller_profile || current_user.admin%>
@@ -52,8 +52,8 @@
     
 <div class="row">
 <div class="row">
-     <% if current_user.admin %>
-       <h1 style="text-align: center"><%= button_to "Add New Product", "/products/new", class: "btn btn-primary", method: :get %></h1><br>
+      <% unless current_user.seller_profile || current_user%>
+         <h1 style="text-align: center"><%= button_to "Add New Product", "/products/new", class: "btn btn-primary", method: :get %></h1><br>
        <% end %>
  
 

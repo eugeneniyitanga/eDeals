@@ -150,8 +150,7 @@ render _form/_comment
                             <p><%= comment.comment%><p>
                         <p class="created_at">Commented <%= time_ago_in_words(comment.created_at) %> ago</p><br>
                         <% end %> 
-                        </ul><br><br>
-
+                        </ul><br>
                                          
                             <div class="container">
                             <div class="row">
@@ -160,10 +159,8 @@ render _form/_comment
                              
                             <%= form_tag "/comments", method: :post do %>
                           <form>
-                       <!--    <a href="/users/<%= current_user.id %>"><%= current_user.first_name + " " + current_user.last_name %></a> -->
                           <div id="fullscreen_bg" class="fullscreen_bg"/>
                           <form class="form-signin"><br>
-                          <!--   <h1 class="form-signin-heading text-muted" style="text-align: center"><strong>Add comment</strong></h1> -->
                            <h4><a href="/users/<%= current_user.id %>"><%= current_user.first_name + " " + current_user.last_name %></a></h4>
                          <textarea rows="4" cols="50" name="comment"  class="form-control" placeholder="Leave a comment here..."></textarea>
                             <input type="hidden" name="product_id" value="<%= @product.id %>"><br>
@@ -181,4 +178,72 @@ render _form/_comment
   </body>
 </html>
 
- </div>
+ </div><br>
+
+
+
+
+     <!DOCTYPE html>
+  <html>
+    <head>
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+      <meta charset="utf-8">
+      <title>Locate Seller</title>
+      <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+          height: 50%;
+          
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+
+        }
+      </style>
+    </head>
+    <body>
+      <div id="map"></div>
+      <script>
+
+        // This example displays a marker at the center of Australia.
+        // When the user clicks the marker, an info window opens.
+
+        function initMap() {
+          var uluru = {lat: <%= @product.seller_profile.latitude %>, lng: <%= @product.seller_profile.longitude %>};
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: uluru 
+          });
+
+          var contentString = '<div id="content">'+
+              '<div id="siteNotice">'+
+              '</div>'+
+              '<h1 id="firstHeading" class="firstHeading"><%= @product.seller_profile.company_name %></h1>'+
+              '<div id="bodyContent">'+
+              '<p><b><%= @product.seller_profile.location %></b>, <%= @product.seller_profile.street_code %> </div> </div>';
+
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+
+          var marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            title: 'Uluru (Ayers Rock)'
+          });
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        }
+      </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVfOMqyUinwJ3_bLicgZ8fuqLlh9PqPTU&callback=initMap">
+      </script>
+    </body>
+  </html>
+   <div class="container">
+</div>
