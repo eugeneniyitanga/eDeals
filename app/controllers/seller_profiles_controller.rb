@@ -25,10 +25,11 @@ class SellerProfilesController < ApplicationController
       street_code: street_code,
       latitude: coordinates[0],
       longitude: coordinates[1],
-      user_id: current_user.id
+      user_id: current_user.id,
+      image: params[:image]
       )
 
-    if @seller_profile.save 
+    if seller_profile.save 
     redirect_to "/seller_profiles/#{seller_profile.id}"
 
     else 
@@ -55,7 +56,8 @@ class SellerProfilesController < ApplicationController
     location: params[:location],
     street_code: street_code,
     latitude: coordinates[0],
-    longitude: coordinates[1]
+    longitude: coordinates[1],
+    image: params[:image]
     )
 
     flash[:success] = "Profile Updated!"

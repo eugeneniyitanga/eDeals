@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324090155) do
+ActiveRecord::Schema.define(version: 20170329141922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,19 @@ ActiveRecord::Schema.define(version: 20170324090155) do
     t.integer  "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "category_products", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -53,10 +66,15 @@ ActiveRecord::Schema.define(version: 20170324090155) do
     t.string   "name"
     t.text     "description"
     t.integer  "price"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "quantity"
     t.integer  "seller_profile_id"
+    t.integer  "category_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "seller_profiles", force: :cascade do |t|
@@ -64,13 +82,16 @@ ActiveRecord::Schema.define(version: 20170324090155) do
     t.string   "phone_number"
     t.string   "location"
     t.string   "street_code"
-    t.text     "image_url"
     t.string   "company_email"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "user_id"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "user_categories", force: :cascade do |t|

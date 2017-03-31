@@ -30,8 +30,10 @@ class OrdersController < ApplicationController
     end 
      total_total = total_subtotal + total_tax 
      @order.assign_attributes(tax: total_tax, subtotal: total_subtotal, total: total_total, completed: true)
-     @order.save
-     redirect_to "/orders/#{@order.id}"    
+     if @order.save
+       OrderMailer.order_confirmation(@order).deliver_now
+     redirect_to "/orders/#{@order.id}" 
+     end   
   end
 
 end

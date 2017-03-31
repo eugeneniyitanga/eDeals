@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
 
   def new 
 
-  end  
+  end
 
   def create
     product_id = params[:product_id]
@@ -21,25 +21,32 @@ class CommentsController < ApplicationController
     flash[:success] = " Your comment was created!"
   end 
 
-  # def edit 
-  #   @comment = Comment.find_by(id: params[:id])
-  # end
-
-  # def update
-  #   comment = Comment.find_by(id: params[:id])
-  #   comment.comment = params[:comment]
-  #   comment.save
-  #   flash[:success] = "Comment Updated"
-  #   redirect_to "/comments/#{comment.id}"
-  # end
-
-  def destroy
+    def edit 
     @comment = Comment.find_by(id: params[:id])
-    @comment.product_id = params[:product_id]
-    @comment.commnet = params[:comment]
-    @comment.save 
-    flash[:danger] = "Comment Deleted"
-    redirect_to "/products/#{@comment.product.id}" 
+  end
+   
+  
 
+  def update
+    comment = Comment.find_by(id: params[:id])
+
+
+    comment.update(
+    comment: params[:comment]
+    )
+
+    flash[:success] = "Comment Updated!"
+    redirect_to "/products/#{comment.product.id}"
+  end 
+
+   def destroy
+    comment = Comment.find_by(id: params[:id])
+    if current_user.comments.include?(comment)
+      comment.destroy
+      redirect_to :back
+    else
+      flash[:warning] = "access denied"
+      redirect_to :back
+    end
   end 
 end

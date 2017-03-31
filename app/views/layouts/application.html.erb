@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>eDealsApp</title>
+    <title style = "font-style: italic; font-weight: bold;">eDeals Rwanda</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-jquery.elevatezoom-track': 'reload' %>
-    <link href="" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kumar+One" rel="stylesheet">
+
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
 
-   <% flash.each do |name, message| %>
-    <div class="alert alert-<%= name %>" role="alert"><%= message %></div>
-    <% end %>
-    <nav class="navbar navbar-default">
+
+  <body>
+   
+    <nav class="navbar navbar-default edeals-nav navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -23,26 +25,29 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Home</a>
+      <a class="navbar-brand" href="/products">eDeals</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/products"><strong>eDeals</strong><span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
+       <!--  <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li> -->
         <li class="dropdown">
-          <a href="#" class="sort " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="sort " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/products?sort=price"></a></li>
-            <li><a href="/products?sort=asc"></a></li>
-            <li><a href="/products?sort=desc"></a></li>
-            <li><a href="/products?filter=discount"></a></li>
-            <li><a href="/products/random"></a></li>
-            <li role="separator" class="divider"></li>
+          <!--   <li><a href="/products?sort=price">sort</a></li>
+            <li><a href="/products?sort=asc">Sort By Price Highest to Lowest</a></li>
+            <li><a href="/products?sort=desc">Sort By Price Lowest to Highest</a></li>
+            <li><a href="/products?filter=discount">Discounted Items</a></li>
+            <li><a href="/products/random">Random Product</a></li> -->
+            <% Category.all.each do |category| %>
+            <li><Strong><a style = "font-size: 130%; padding-right: 100px;" href="/products/?category=<%=category.name %>"><%= category.name.capitalize %></a></a></li>
+            <% end %>
+            <!-- <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="#">One more separated link</a></li> -->
           </ul>
         </li>
       </ul>
@@ -51,14 +56,18 @@
           <input type="text" class="form-control" placeholder="Search">
         </div> -->
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" name="search_query">
+          <input style= " height: ; width: 300px; padding-right: 80px;" type="text" class="form-control" placeholder="Search here..." name="search_query">
         </div>
-        <button type="submit" class="btn btn-default">Search</button>
+        <button style= " height: ; width: 100px; padding-right: 20px;" type="submit" class="btn btn-default"><strong>Search</strong></button>
       <% end %>  
+         <ul class="nav navbar-nav">
+          <li><a href="/pages/about_us">About Us</a></li>
+        </ul>
       <ul class="nav navbar-nav navbar-right">
       <% if current_user %> 
+          <li style="font-weight:  bold;"><%= link_to "Cart" , "/carted_products", class:"glyphicon glyphicon-shopping-cart" %></li>
+          <li><a href=""><%= current_user.first_name%></a></li>
           <li><%= link_to "Logout", "/logout", method: :delete %></li>
-          <li><%= link_to "Shopping Cart", "/carted_products" %></li>
           <% else %>
         <li class="dropdown">
           <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a> -->
@@ -74,10 +83,8 @@
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
-</nav>
-<div class="container">
-   <p>
-    <% flash.each do |key, value| %>
+</nav><br><br><br><br><br>
+ <% flash.each do |key, value| %>
     <% alert_class = case key
     when :notice then "success"
     when :alert then "danger"
@@ -88,8 +95,118 @@
      <%= value %>
      <% end %>
      <% end %>
-   </p>
+<div class="container">
     <%= yield %>
+</div>
+  </body><br><br>
+</html><br><br>
+
+<!-- Footer starts from here -->
+   <!-- Footer 2 - Right Social/Left Menu -->
+     
+  <div class="search-text"> 
+    <div class="container">
+      <div class="row text-center">
+       
+        <div class="form">
+        <%= form_tag "/products/search", class: "navbar-form navbar-left", method: :post do %>
+          <form id="search-form" class="form-search form-horizontal">
+              <input type="text" class="input-search" placeholder="Search" name="search_query">
+              <button type="submit" class="btn-search">Search</button>
+              <% end %>
+          </form>
+        </div>
+      
+      </div>         
+    </div>     
+  </div>
+  
+  
+  <footer>
+    <div class="container-fluid">
+      <div class="row text-center">
+     
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <ul class="menu list-inline">       
+            <li>
+              <a style="color: white;" href="/products">Home</a>
+            </li>
+
+            <li>
+              <a style="color: white;" href="/pages/about_us">About Us</a>
+            </li>
+                     
+            <li>
+              <a style="color: white;" target="blank" href="http://niyitangaeugene.blogspot.com/">Blog</a>
+            </li>
+              
+             <% if current_user %> 
+             <li>
+              <a style="color: white;" href="/seller_profiles/new">How To Sell</a>
+            </li>
+            <% end %>
+
+            <li>
+              <a style="color: white;" href="/pages/contact_us">Contact Us</a>
+           </li>
+                 
+           <!--  <li>
+               <a href="#">Gallery</a>
+            </li> -->
+                 
+          </ul>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <ul class="list-inline">       
+            <li>
+              <a target="blank" href="https://www.facebook.com/eugene.niyitanga"><i class="fa fa-facebook fa-2x"></i></a>
+            </li>
+             
+            <li>
+              <a target="blank" href="#"><i class="fa fa-dropbox fa-2x"></i></a>
+            </li>
+             
+            <li>
+              <a target="blank" href="https://www.instagram.com/eugene_niyitanga/?hl=en"><i class="fa fa-flickr fa-2x"></i></a> 
+            </li>
+            
+            <li>
+              <a target="blank" href="https://"><i class="fa fa-github fa-2x"></i></a>
+            </li>
+              
+            <li>
+              <a target="blank" href="https://www.linkedin.com/in/eugene-niyitanga-a3a349101/"><i class="fa fa-linkedin fa-2x"></i></a>
+            </li>
+             
+            <li>
+              <a target="blank" href="https://twitter.com/eugeneniyitang1"><i class="fa fa-tumblr fa-2x"></i></a>
+            </li>
+              
+            <li>
+              <a target="blank" href="#"><i class="fa fa-google-plus fa-2x"></i></a>
+            </li> 
+          </ul>
+        </div>  
+      </div> 
+    </div>
+  </footer>
+  <div class="copyright">
+    <div class="container">
+     
+      <div class="row text-center">
+        <p style="color: blue;">Copyright © eDeals Kigali-Rwanda 2017 All rights reserved</p>
+      <div style="float: right;" class="col-md-3">
+       <strong><%= Time.now %></strong>
+       <ul class="list-inline quicklinks">
+          <li><a href="#">Privacy Policy</a>
+          </li>
+          <li><a href="#">Terms of Use</a>
+          </li>
+      </ul>
+      </div>
+      </div>
+</div>
   </div>
   </body>
+
 </html>

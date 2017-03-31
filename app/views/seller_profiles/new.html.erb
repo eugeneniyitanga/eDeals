@@ -5,7 +5,7 @@
    <div class="col-md-6">
 
    
-      <%= form_tag "/seller_profiles", method: :post, multipart: true do %>
+      <%= form_tag "/seller_profiles", multipart: true, method: :post do %>
       <form>
       <div id="fullscreen_bg" class="fullscreen_bg"/>
       <form class="form-signin"><br>
@@ -16,8 +16,8 @@
          <h4>Location</h4><input type="name" class="form-control" name="location" placeholder="Add Location of your b" required="" autofocus="">
          <h4>Street Code</h4><input type="name" class="form-control" name="street_code" placeholder="Add Your Address" required="" autofocus="">
         <div> <br>
-      <!--  <strong>Profile Picture:</strong><input type="file" name="image" accept="image/*;capture=camera">
-     </div> -->
+       <strong>Profile Picture:</strong><input type="file" name="image" accept="image/*;capture=camera">
+     </div><br>
          <button class="btn btn-lg btn-primary btn-block" type="submit">
           Become a Seller
         </button>

@@ -6,14 +6,18 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+   if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      flash[:success] = "Welcome back #{user.first_name}!" 
-      redirect_to '/'
-    else
+      if user.seller_profile 
+        redirect_to "/seller_profiles/#{user.seller_profile.id}"
+      else 
+        flash[:success] = "Welcome back #{user.first_name}!" 
+        redirect_to '/'
+      end 
+    else 
       flash[:warning] = 'Invalid email or password!'
       redirect_to '/login'
-    end
+    end 
   end
 
   def destroy

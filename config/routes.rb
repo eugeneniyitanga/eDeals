@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get "/", to: 'products#index'
 
   
+  get "/pages/contact_us", to: 'pages#contact_us'
+  get "/pages/about_us", to: 'pages#about_us'
   get "/products", to: 'products#index'
   get "/products/new", to: 'products#new'
   get "/products/:id", to: 'products#show'
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
 
   get "/comments", to: 'comments#new'
   post "/comments", to: 'comments#create'
+  delete "/comments/:id", to: 'comments#destroy'
+
 
   get "/orders/:id", to: "orders#show"
   patch "/orders/:id", to: 'orders#update'
@@ -29,7 +33,8 @@ Rails.application.routes.draw do
   get "/carted_products", to: 'carted_products#index'
   delete "/carted_products/:id", to: 'carted_products#destroy'
 
-  resources :seller_profiles 
+  resources :seller_profiles
+  
 end
 
 

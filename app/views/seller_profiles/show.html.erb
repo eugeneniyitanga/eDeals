@@ -1,5 +1,7 @@
-   <h1 class="profile_picture" style="float: right;"><img src="<%= current_user.seller_profile.image_url %>"><strong></strong></h1><br><br>
+   <h4 style="float: right;"><%= link_to "Edit Profile", "/seller_profiles/#{@current_user.seller_profile.id}/edit", method: :get, :data => {:confirm => 'Are you sure?'}, class: "btn btn-success" %></h4><br><br>
    <h4 style="float: right;"><%= current_user.seller_profile.company_name %></h4>
+   <h4 class="profile_picture" style="float: right;"><img src="<%= current_user.seller_profile.image %>"><strong></strong></h1><br><br>
+
 
      <% if current_user.seller_profile %>
        <%= button_to "Add New Product", "/products/new", class: "btn btn-primary", method: :get %><br>
@@ -13,18 +15,20 @@
       <% three_products.each do |product| %>
       <div class="col-md-4">
         <h4><a href="/products/<%= product.id %>"><%= product.name %></a></h4><br>
-        <h4><img class="index" src="<%=product.images.first.url %>"></h4><br><br>
+        <h4><img class="index" src="<%=product.image %>"></h4><br><br>
         </script>
 
-        <h4><%= product.description %><br></h4>
+        <h4><strong>Description: </strong><%= product.description %><br></h4>
         <br>
-        <h4>$<%= product.price %><br></h4>
+        <h4><strong>Price: </strong>$<%= product.price %><br></h4>
       </div>
       <br>
       <% end %> 
     </div>
     <% end %> 
   </div>
+  </div>
+
 
 
 

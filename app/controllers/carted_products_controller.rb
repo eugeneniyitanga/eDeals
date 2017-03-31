@@ -2,8 +2,10 @@ class CartedProductsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+  
+    @carted_products = CartedProduct.all
+    
     orders = Order.where("user_id = ? AND completed = ?", current_user.id, false)
-    @carts = CartedProduct.where(order_id:orders.first.id)
     @order = current_user.orders.find_by(completed: false)
     unless @order
       flash[:warning] = "Your Cart is Empty!"
@@ -20,10 +22,14 @@ class CartedProductsController < ApplicationController
       order = Order.new(user_id: current_user.id, completed: false)
       order.save 
     end 
-
-    cart = CartedProduct.new(order_id: order.id, product_id:params[:product_id], quantity:params[:quantity])
-    cart.save
-    redirect_to "/carted_products"
+    if current_user
+      cart = CartedProduct.new(order_id: order.id, product_id:params[:product_id], quantity:params[:quantity])
+      cart.save
+      redirect_to "/carted_products"
+    else 
+      flash[:warning] = "Sign up to order products!"
+      redirect_to "/signup"
+    end
   end 
 
   def destroy 

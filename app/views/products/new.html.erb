@@ -10,9 +10,22 @@
       <div id="fullscreen_bg" class="fullscreen_bg"/>
       <form class="form-signin"><br>
         <h1 class="form-signin-heading text-muted" style="text-align: center"><strong>Create Product</strong></h1>
+      <strong>Category:</strong><br>
+          <select class="form_control" name="category">
+            <% Category.all.each do |category| %>
+            <option value="<%= category.id %>"><%= category.name %></option>
+            <% end %>     
+          </select> <br>
         <h4>Product</h4><input type="name" class="form-control" name="name" placeholder="Product Name" required="" autofocus="">
-         <h4>Description</h4><textarea rows="4" cols="50" name=description  class="form-control" placeholder="Add description" required=""></textarea>
-           <h4>Price</h4><input type="integer" class="form-control" name="price" placeholder="Price" required="" autofocus="">
+         <h4>Description</h4><textarea rows="4" cols="50" name=description  class="form-control" placeholder="Add description" required=""></textarea><br>
+       
+        <h4>Quantity</h4><input type="integer" class="form-control" name="quantity" placeholder="Available Quantity" required="" autofocus=""><br>
+
+        <h4>Price</h4><input type="integer" class="form-control" name="price" placeholder="Price" required="" autofocus="">
+      
+
+        <h4><strong>Image</h4>ng></strong><input type="file" name="image" accept="image/*;capture=camera">
+         </div><br>
            <button class="btn btn-lg btn-primary btn-block" type="submit">
           Add Product
         </button>

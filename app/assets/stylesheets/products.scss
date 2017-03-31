@@ -163,3 +163,16 @@ img {
             transform: scale(1); } }
 
 /*# sourceMappingURL=style.css.map */
+
+.sticker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 63px;
+    height: 63px;
+}
+.sticker-new {
+    background: url(http://keenthemes.com/assets/bootsnipp/new.png) no-repeat;
+    left: auto;
+    right: 0;
+}

@@ -1,16 +1,9 @@
-      <% if current_user.seller_profile %>
-        <h4 style="float: right;"><a href="/seller_profiles/<%= current_user.seller_profile.id %>", class: "btn btn-primary"><strong>Visit Your store</a></strong></h4><br> 
-      <% end %>
+    
       
-     <% unless current_user.seller_profile || current_user.admin%>
-        <%= link_to "Sell with us!", "/seller_profiles/new", style: "float: left;", class: "btn btn-primary" %>
-     <% end %>
-<br>
-<h1 class="header" style="text-align: center"><strong>Enjoy eDeals!!</h1></strong><br><br>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <script src='jquery-1.8.3.min.js'></script>
-  <script src='jquery.elevateZoom-2.1.0.min.js'></script>
+<h1 class="header" style="text-align: center"><strong>Buy and Sell Via eDeals Rwanda!</h1></strong><br><br>
+
+<div id="myCarousel" style="width: 100%; height: 5;" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -20,21 +13,21 @@
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+  <div style="width: 100%; height: 5;" class="carousel-inner" role="listbox">
     <div class="item active">
-      <img style="text-align: center" src="https://s-media-cache-ak0.pinimg.com/736x/58/da/1e/58da1e8c38dc002bb3e1a92dba32963f.jpg" alt="">
+      <img style="width: 100%; height: 5;" src="http://i.huffpost.com/gen/1765302/images/o-NEW-MACBOOK-AIR-facebook.jpg" alt="">
     </div>
 
     <div class="item">
-      <img style="text-align: center" src= "http://i.ebayimg.com/00/s/NTAwWDUwMA==/z/Zu0AAOxyVaBSsSbm/$_35.JPG?set_id=2" alt="">
+      <img style="width: 100%; height: 5;" src= "https://www.brodercomputers.com/wp-content/uploads/2015/05/Asse-1.png" alt="">
     </div>
 
     <div class="item">
-      <img style="text-align: center" src="https://www.androidcentral.com/sites/androidcentral.com/files/styles/w800h450crop/public/topic_images/2015/galaxy-s6-both-versions-5.jpg?itok=2t6DYZEw&timestamp=1429735520" alt="Samsung Galaxy S 6">
+      <img style="width: 100%; height: 5;" src="https://www.androidcentral.com/sites/androidcentral.com/files/styles/w800h450crop/public/topic_images/2015/galaxy-s6-both-versions-5.jpg?itok=2t6DYZEw&timestamp=1429735520" alt="Samsung Galaxy S 6">
     </div>
 
     <div class="item">
-      <img src="http://icdn7.digitaltrends.com/image/apple-iphone-7-iphone-7-plus-review-9-1500x1000.jpg" alt="Flower">
+      <img style="width: 100%; height: 5;" src="http://icdn7.digitaltrends.com/image/apple-iphone-7-iphone-7-plus-review-9-1500x1000.jpg" alt="Iphone">
     </div>
   </div>
 
@@ -47,25 +40,23 @@
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div><br><br><br>
+</div><br><br>
 
     
 <div class="row">
 <div class="row">
-      <% unless current_user.seller_profile || current_user%>
+      <% if current_user && current_user.admin %>
          <h1 style="text-align: center"><%= button_to "Add New Product", "/products/new", class: "btn btn-primary", method: :get %></h1><br>
        <% end %>
- 
-
     <% @products.each_slice(3) do |three_products| %>
       <div class="row">
         <% three_products.each do |product| %>
         <div class="col-md-4">
         <h4><a href="/products/<%= product.id %>"><%= product.name %></a></h4><br>
-        <h4><img id="zoom_07" class="index" src="<%=product.images.first.url %>"></h4><br><br>
-        <h4><%= product.description %><br></h4>
-        <br>
-        <h4>$<%= product.price %><br></h4>
+        <h4><img class="index" src="<%= product.image %>"></h4><br>
+        <h4><strong>Description:</strong> <%= product.description %><br></h4>
+        <h4><strong>Price:</strong> $<%= product.price %><br></h4>
+         <h4><strong>From:</strong> <%= product.seller_profile.company_name %></h4>
         <% if product.created_at > 1.week.ago%>
           <div class="sticker sticker-new"></div>
         <% end %>
@@ -76,3 +67,5 @@
     <% end %> 
   </div>
    </div>
+ 
+    <h4 style = "text-align: center;"><strong><%= will_paginate @products %></h4></strong>

@@ -1,50 +1,3 @@
-<!-- <title> Electonic Products </title>
-<table class="table table bordered">
-<tr>
-    <th> Product <br></th>
-    <th> Description <br></th>
-    <th> Price <br></th>
-    <th> Images </th>
-    <th> Edit </th>
-    <th> Delete</th>
-</tr>
-    <tr>
-    <td><%= @product.name %><br></td>
-    <br>
-    <td><%= @product.description %><br></td>
-    <br>
-    <td>$<%= @product.price %><br></td>
-     <% @product.images.each do |image| %> 
-   <td><img class="images" src="<%= image.url %>"><br></td>
-    <% end %> 
-    <td><%= button_to "Edit", "/products/#{@product.id}/edit", method: :get, :data => {:confirm => 'Are you sure?'} %>
-<br></td>
-        
-    <td><%= form_tag "/products/#{@product.id}", method: :delete do %>
-<input type="submit" value="Delete"></td>
-<% end %>  
-    </tr>
-</table><br><br>
-
-
-
-<ul>
-<% @product.comments.each do |comment| %> 
-    <p><strong><%= comment.comment%></strong><p>
-<p class="created_at">Commented <%= time_ago_in_words(comment.created_at) %>Ago</p><br>
-<% end %> 
-</ul><br><br>
-
-render _form/_comment
-<p><strong>Add Comment</strong>
-<%= form_tag "/comments", method: :post do %>
-    Comment:<br>
-    <textarea rows="4" cols="50" name="comment"></textarea><br>
-    <input type="hidden" name="product_id" value="<%= @product.id %>">
-    <button type="submit">Submit</button>
-<% end %> 
-</p><br><br> -->
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,29 +21,28 @@ render _form/_comment
                         
                         <div class="preview-pic tab-content">
                           <div class="tab-pane active" id="pic-1">
-                               <% @product.images.each do |image| %> 
-                              <img class="images" src="<%= image.url %>"><br>
-                            <% end %> 
+                              <img class="images" src="<%= @product.image %>"><br>
                           </div>
-                          <div><br><br>
-                          <% if current_user.admin || current_user.seller_profile %>
-                           <%= link_to "Edit Product", "/products/#{@product.id}/edit", method: :get, :data => {:confirm => 'Are you sure?'}, class: "btn btn-success" %>
-                
-
-                            <%= link_to "Delete Product", "/products/#{@product.id}", method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>              
-                           <% end %>
-                         </div>
-                         <!--  <div class="tab-pane" id="pic-2"><img src="" /></div>
+                          <div class="tab-pane" id="pic-2"><img src="" /></div>
                           <div class="tab-pane" id="pic-3"><img src="" /></div>
                           <div class="tab-pane" id="pic-4"><img src="" /></div>
-                          <div class="tab-pane" id="pic-5"><img src="" /></div> -->
+                          <div class="tab-pane" id="pic-5"><img src="" /></div>
+                          <div>
+                         </div>
                         </div>
                         <ul class="preview-thumbnail nav nav-tabs">
-                          <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="" /></a></li>
+                          <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src=""</a></li>
                           <li><a data-target="#pic-2" data-toggle="tab"><img src="" /></a></li>
                           <li><a data-target="#pic-3" data-toggle="tab"><img src="" /></a></li>
                           <li><a data-target="#pic-4" data-toggle="tab"><img src="" /></a></li>
                           <li><a data-target="#pic-5" data-toggle="tab"><img src="" /></a></li>
+                          <% if current_user %>
+                          <% if current_user.admin || current_user.seller_profile %>
+                           <%= link_to "Edit Product", "/products/#{@product.id}/edit", method: :get, :data => {:confirm => 'Are you sure?'}, class: "btn btn-success" %>                
+
+                            <%= link_to "Delete Product", "/products/#{@product.id}", method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>              
+                           <% end %>
+                           <% end %>
                         </ul>
                         
                     </div>
@@ -111,7 +63,7 @@ render _form/_comment
 
                         <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
                     
-                        <h4 class=""><Strong>Company Name: </Strong><strong><%= @product.seller_profile.company_name %></strong></span><br></h4>
+                        <h4 class=""><Strong>From: </Strong><strong><%= @product.seller_profile.company_name %></strong></span><br></h4>
 
                       <!--   <h5 class="sizes">sizes:
                             <span class="size" data-toggle="tooltip" title="small">s</span>
@@ -147,10 +99,13 @@ render _form/_comment
     <br><br>
                         <% @product.comments.each do |comment| %> 
                          <a href="/users"><strong><%= comment.user.first_name %></strong></a>
-                            <p><%= comment.comment%><p>
+                            <p><%= comment.comment%><br><% if current_user.comments.include?(comment)%>
+                          
+                          <%= link_to "delete", "/comments/#{comment.id}", method: :delete %> 
+                        <% end %><p>                                 
                         <p class="created_at">Commented <%= time_ago_in_words(comment.created_at) %> ago</p><br>
                         <% end %> 
-                        </ul><br>
+                        </ul>
                                          
                             <div class="container">
                             <div class="row">
@@ -161,7 +116,8 @@ render _form/_comment
                           <form>
                           <div id="fullscreen_bg" class="fullscreen_bg"/>
                           <form class="form-signin"><br>
-                           <h4><a href="/users/<%= current_user.id %>"><%= current_user.first_name + " " + current_user.last_name %></a></h4>
+                          <% if current_user %>
+                           <h4><%= current_user.first_name + " " + current_user.last_name %></h4>
                          <textarea rows="4" cols="50" name="comment"  class="form-control" placeholder="Leave a comment here..."></textarea>
                             <input type="hidden" name="product_id" value="<%= @product.id %>"><br>
                            <button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -169,6 +125,7 @@ render _form/_comment
                                   </button>
                                 </form>
                                   </div>
+                                <% end %>
                                 <% end %>
                               </div>
                             </div>
@@ -181,7 +138,7 @@ render _form/_comment
  </div><br>
 
 
-
+            <h1 style = "text-align: center;"><strong>View Location of the Seller Via this Map </strong></h1>
 
      <!DOCTYPE html>
   <html>
