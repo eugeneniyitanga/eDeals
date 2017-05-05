@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title style = "font-style: italic; font-weight: bold;">eDeals Rwanda</title>
+    <title style = "font-style: italic; font-weight: bold;">eDeals</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -25,7 +25,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/products">eDeals</a>
+      <a style="color: #FFF; font-size: 130%;" class="navbar-brand" href="/products">eDeals</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -34,7 +34,7 @@
        <!--  <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li> -->
         <li class="dropdown">
-          <a href="#" class="sort " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+          <a style="color: #FFF; " href="#" class="sort " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
           <ul class="dropdown-menu">
           <!--   <li><a href="/products?sort=price">sort</a></li>
             <li><a href="/products?sort=asc">Sort By Price Highest to Lowest</a></li>
@@ -61,17 +61,17 @@
         <button style= " height: ; width: 100px; padding-right: 20px;" type="submit" class="btn btn-default"><strong>Search</strong></button>
       <% end %>  
          <ul class="nav navbar-nav">
-          <li><a href="/pages/about_us">About Us</a></li>
+          <li style="font-weight: bold; color: #FFF;"><a style="color: #FFF;" href="/pages/about_us">About Us</a></li>
         </ul>
       <ul class="nav navbar-nav navbar-right">
       <% if current_user %> 
-          <li style="font-weight:  bold;"><%= link_to "Cart" , "/carted_products", class:"glyphicon glyphicon-shopping-cart" %></li>
+          <li style="color: #FFF; font-weight: bold;"><%= link_to "Cart" , "/carted_products", class:"glyphicon glyphicon-shopping-cart" %></li>
           <li><a href=""><%= current_user.first_name%></a></li>
           <li><%= link_to "Logout", "/logout", method: :delete %></li>
           <% else %>
         <li class="dropdown">
           <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a> -->
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" style="color: white;">
              <li><%= link_to "Singup", "/signup"%></li>
              <li><%= link_to "Login", "/login"%></li>
              <% end %>
@@ -194,7 +194,7 @@
     <div class="container">
      
       <div class="row text-center">
-        <p style="color: blue;">Copyright © eDeals Kigali-Rwanda 2017 All rights reserved</p>
+        <p style="color: blue;">Copyright © <%= Time.now.year %> eDeals Kigali - Rwanda All rights reserved</p>
       <div style="float: right;" class="col-md-3">
        <strong><%= Time.now %></strong>
        <ul class="list-inline quicklinks">

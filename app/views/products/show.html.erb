@@ -96,7 +96,8 @@
             </div>
         </div>
     </div>
-    <br><br>
+    <br><br>           
+                        <% if current_user %> 
                         <% @product.comments.each do |comment| %> 
                          <a href="/users"><strong><%= comment.user.first_name %></strong></a>
                             <p><%= comment.comment%><br><% if current_user.comments.include?(comment)%>
@@ -105,6 +106,7 @@
                         <% end %><p>                                 
                         <p class="created_at">Commented <%= time_ago_in_words(comment.created_at) %> ago</p><br>
                         <% end %> 
+                        <% end %>
                         </ul>
                                          
                             <div class="container">

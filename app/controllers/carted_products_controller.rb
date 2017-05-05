@@ -27,8 +27,8 @@ class CartedProductsController < ApplicationController
       cart.save
       redirect_to "/carted_products"
     else 
-      flash[:warning] = "Sign up to order products!"
-      redirect_to "/signup"
+      flash[:warning] = "Login to order products!"
+      redirect_to "/Login"
     end
   end 
 
